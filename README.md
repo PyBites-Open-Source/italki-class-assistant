@@ -11,3 +11,5 @@ python main.py
 ```
 
 Enjoy 😎 and boost your language learning 📈
+
+<img width="956" alt="image" src="https://github.com/bbelderbos/italki-class-assistant/assets/387927/7ad0d70f-45db-4e14-adc7-63ccb9eee17d">
