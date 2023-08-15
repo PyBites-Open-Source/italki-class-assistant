@@ -1,5 +1,7 @@
 from googletrans import Translator, LANGUAGES
 
+from cache import cache_translation
+
 
 def main():
     while True:
@@ -20,7 +22,8 @@ def main():
             print(translated)
 
 
-def translate_text(text, target="en"):
+@cache_translation
+def translate_text(text: str, target: str = "en") -> str:
     translator = Translator()
     translation = translator.translate(text, dest=target)
     return translation.text

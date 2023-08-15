@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from translate import translate_text, LANGUAGES
+from cache import get_translations_for_language
 
 
 def create_window():
@@ -26,9 +27,8 @@ def create_window():
 
 def main():
     window = create_window()
-
-    # List to store translations in the format "original - translated"
     translations = []
+    prev_lang = None
 
     while True:
         event, values = window.read()
@@ -36,8 +36,17 @@ def main():
         if event == sg.WINDOW_CLOSED or event == "Exit":
             break
 
+        target_language_key = {v: k for k, v in LANGUAGES.items()}[values["-LANG-"]]
+        if target_language_key != prev_lang:
+            prev_lang = target_language_key
+            cached_entries = get_translations_for_language(target_language_key)
+            translations = [
+                f"{entry.source_text} - {entry.translated_text}"
+                for entry in cached_entries
+            ]
+            window["-OUTPUT-"].update(translations)
+
         if event == "Translate":
-            target_language_key = {v: k for k, v in LANGUAGES.items()}[values["-LANG-"]]
             translated_text = translate_text(
                 values["-TEXT-"], target=target_language_key
             )
