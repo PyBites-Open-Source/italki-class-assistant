@@ -8,20 +8,30 @@ def create_window():
 
     layout = [
         [
-            sg.Text("Choose a language to translate to:"),
-            sg.Combo(list(LANGUAGES.values()), key="-LANG-", size=(20, 1)),
+            sg.Text("Choose a language to translate to:", font=("Helvetica", 20)),
+            sg.Combo(
+                list(LANGUAGES.values()),
+                key="-LANG-",
+                size=(20, 1),
+                font=("Helvetica", 20),
+            ),
         ],
         [
-            sg.Text("Enter text to translate:"),
-            sg.InputText(key="-TEXT-", size=(50, 5)),
+            sg.Text("Enter text to translate:", font=("Helvetica", 20)),
+            sg.InputText(key="-TEXT-", size=(50, 5), font=("Helvetica", 20)),
         ],
-        [sg.Button("Translate", bind_return_key=True), sg.Button("Exit")],
-        [sg.Text("Translation output:", size=(40, 1))],
-        [sg.Listbox(values=[], size=(60, 10), key="-OUTPUT-", font=("Helvetica", 12))],
+        [
+            sg.Button("Translate", bind_return_key=True, font=("Helvetica", 20)),
+            sg.Button("Exit", font=("Helvetica", 20)),
+        ],
+        [
+            sg.Text("Translation output:", size=(40, 1), font=("Helvetica", 20)),
+        ],
+        [sg.Listbox(values=[], size=(60, 10), key="-OUTPUT-", font=("Helvetica", 20))],
     ]
 
     return sg.Window(
-        "Text Translator", layout, font=("Helvetica", 14), return_keyboard_events=True
+        "Text Translator", layout, font=("Helvetica", 20), return_keyboard_events=True
     )
 
 
