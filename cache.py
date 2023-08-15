@@ -1,6 +1,8 @@
-from typing import Callable
-from sqlmodel import SQLModel, Field, Session, create_engine, select
 from functools import wraps
+from typing import Callable
+
+from sqlalchemy import desc
+from sqlmodel import SQLModel, Field, Session, create_engine, select
 
 # SQLite database file
 DATABASE_URL = "sqlite:///translation_cache.db"
@@ -61,7 +63,7 @@ def get_translations_for_language(target_language: str):
         # Query for translations in the selected target language
         statement = select(TranslationCache).where(
             TranslationCache.target_language == target_language
-        )
+        ).order_by(desc(TranslationCache.id))
         results = session.exec(statement).all()
 
     return results
