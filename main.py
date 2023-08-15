@@ -60,14 +60,8 @@ def main():
             translated_text = translate_text(
                 values["-TEXT-"], target=target_language_key
             )
-
-            # Create a new entry for the translation
             translation_entry = f"{values['-TEXT-']} - {translated_text}"
-
-            # Insert the new entry at the beginning of the translations list
             translations.insert(0, translation_entry)
-
-            # Update the Listbox element to display the updated translations list
             window["-OUTPUT-"].update(translations)
 
     window.close()
