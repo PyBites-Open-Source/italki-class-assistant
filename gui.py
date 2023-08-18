@@ -25,7 +25,7 @@ layout = [
     [sg.Multiline(key="-OUTPUT-", size=(50, 10), disabled=True, autoscroll=True)],
 ]
 
-window = sg.Window("Translator", layout)
+window = sg.Window("Italki Class Assistant", layout)
 
 while True:
     event, values = window.read()

@@ -1,4 +1,4 @@
-# Italki class assistant
+# Italki Class Assistant
 
 This script / repo is to quickly look up words in different target languages as I am talking with my teachers on Italki 💪
 
