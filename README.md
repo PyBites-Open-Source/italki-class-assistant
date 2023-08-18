@@ -7,7 +7,7 @@ It uses [Googletrans](https://py-googletrans.readthedocs.io/en/latest/) but note
 To use it make a virtual environment (Unix: `python -m venv venv && source venv/bin/activate`) and install the requirements (`pip install requirements.txt`), then:
 
 ```
-python main.py
+python gui.py
 ```
 
 Enjoy 😎 and boost your language learning 📈
