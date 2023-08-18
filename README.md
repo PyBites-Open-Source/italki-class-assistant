@@ -11,3 +11,6 @@ python gui.py
 ```
 
 Enjoy 😎 and boost your language learning 📈
+
+<img width="661" alt="image" src="https://github.com/bbelderbos/italki-class-assistant/assets/387927/24515798-9f32-40b5-985e-9c424ed5fbe1">
+
