@@ -1,7 +1,8 @@
 from datetime import datetime
 
-import PySimpleGUI as sg
+from decouple import config
 from googletrans import LANGUAGES, Translator
+import PySimpleGUI as sg
 
 from db import store_translation, retrieve_translations
 from models import Translation
@@ -10,11 +11,14 @@ from translate import translate_text
 # Set a custom theme with larger fonts
 sg.set_options(font=("Any 16"))
 
+default_lang_code = config("ITALKI_ACTIVATE_LANGUAGE_CODE", default="en")
+default_lang_name = LANGUAGES[default_lang_code]
+
 layout = [
     [
         sg.Combo(
             values=list(LANGUAGES.values()),
-            default_value="English",
+            default_value=default_lang_name,
             key="-LANGUAGE-",
             enable_events=True,
             readonly=True,

@@ -18,3 +18,4 @@ SQLAlchemy==1.4.41
 sqlalchemy2-stubs==0.0.2a35
 sqlmodel==0.0.8
 typing_extensions==4.7.1
+python-decouple==3.8
