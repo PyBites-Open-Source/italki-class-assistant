@@ -1,4 +1,5 @@
-from sqlmodel import Session, SQLModel, create_engine, select
+from sqlalchemy import desc
+from sqlmodel import Session, SQLModel, create_engine
 
 from models import Translation
 
@@ -13,7 +14,9 @@ def create_db_and_tables():
 def store_translation(text: str, destination: str, translated_text: str):
     with Session(engine) as session:
         translation = Translation(
-            text=text, destination_language=destination, translated_text=translated_text
+            text=text,
+            destination_language=destination,
+            translated_text=translated_text,
         )
         session.add(translation)
         session.commit()
@@ -24,7 +27,7 @@ def retrieve_translations(dest_language: str):
         translations = (
             session.query(Translation)
             .filter_by(destination_language=dest_language)
-            .order_by(Translation.query_datetime.desc())
+            .order_by(desc(Translation.query_datetime))
             .all()
         )
         return translations

@@ -1,4 +1,4 @@
-from db import store_translation, retrieve_translations
+from db import retrieve_translations, store_translation
 from translate import translate_text
 
 
@@ -10,7 +10,9 @@ def main():
             break
 
         while True:
-            text = input("Enter text to translate (q to quit, p to print history): ")
+            text = input(
+                "Enter text to translate (q to quit, p to print history): "
+            )
             if text == "q":
                 break
 

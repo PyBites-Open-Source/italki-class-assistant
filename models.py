@@ -1,10 +1,10 @@
 from datetime import datetime
 from typing import Optional
 
-from sqlmodel import SQLModel, Field
+from sqlmodel import Field, SQLModel
 
 
-class Translation(SQLModel, table=True):
+class Translation(SQLModel, table=True):  # type: ignore
     id: Optional[int] = Field(default=None, primary_key=True)
     text: str
     destination_language: str
