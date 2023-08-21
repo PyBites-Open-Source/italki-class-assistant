@@ -24,7 +24,7 @@ def retrieve_translations(dest_language: str):
         translations = (
             session.query(Translation)
             .filter_by(destination_language=dest_language)
-            .order_by(Translation.query_datetime.asc())
+            .order_by(Translation.query_datetime.desc())
             .all()
         )
         return translations

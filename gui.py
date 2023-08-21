@@ -1,14 +1,13 @@
 from datetime import datetime
+import math
 
 from decouple import config
 from googletrans import LANGUAGES, Translator
 import PySimpleGUI as sg
+import pyperclip
 
 from db import store_translation, retrieve_translations
 from translate import translate_text
-
-import pyperclip
-import math
 
 SEPARATOR = "→"
 
