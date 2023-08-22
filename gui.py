@@ -59,9 +59,7 @@ def main():
 
         if event == "-LANGUAGE-" or event == "Translate":
             lang_code = [
-                code
-                for code, name in LANGUAGES.items()
-                if name == values["-LANGUAGE-"]
+                code for code, name in LANGUAGES.items() if name == values["-LANGUAGE-"]
             ][0]
 
             if event == "Translate":

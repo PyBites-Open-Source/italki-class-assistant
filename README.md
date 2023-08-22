@@ -4,13 +4,51 @@ This script / repo is to quickly look up words in different target languages as 
 
 It uses [Googletrans](https://py-googletrans.readthedocs.io/en/latest/) but note that due to [an issue](https://github.com/ssut/py-googletrans/issues/383) it uses [a pre-release](https://pypi.org/project/googletrans/3.1.0a0/)
 
-To use it make a virtual environment (Unix: `python -m venv venv && source venv/bin/activate`) and install the requirements (`pip install requirements.txt`), then:
+## Installation
+1. Create Virtual Environment
+    ```bash
+    $ python3 -m venv venv
+    ```
 
-```
-python gui.py
-```
+1. Activate Environment
+    ```bash
+    $ source venv/bin/activate # Mac/Linux
+    $ venv\Scripts\activate # Windows
+    ```
 
-If you want to start the app with a pre-selected language, you can set the `ITALKI_ACTIVATE_LANGUAGE_CODE` environment variable either in an `.env` file (locally in the project root folder) or from the command line, for example: `export ITALKI_ACTIVATE_LANGUAGE_CODE=fr`.
+1. Install Dependencies
+    ```bash
+    $ pip install -r requirements.txt
+    ```
+1. Setup Database
+    ```bash
+    $ python3 db.py
+    ```
+1. Copy `.env-template`
+    ```bash
+    $ cp .env-template .env
+    ```
+    `.env` file should now exist.
+
+1. (Optional) Configure Default Language in `.env`
+
+    If you want to start the app with a pre-selected language, you can set the `ITALKI_ACTIVATE_LANGUAGE_CODE` environment variable in the `.env` file. 
+    
+    EXAMPLE:
+    ```js
+    ITALKI_ACTIVATE_LANGUAGE_CODE="fr"
+    ```
+
+## Running
+1. Running GUI (Graphical User Interface)
+    ```bash
+    $ python3 gui.py
+    ```
+    
+2. Running CLI (Cammand Line Interface)
+    ```
+    $ python3 main.py
+    ```
 
 Enjoy 😎 and boost your language learning 📈
 
