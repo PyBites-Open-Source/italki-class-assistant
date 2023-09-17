@@ -33,5 +33,17 @@ def retrieve_translations(dest_language: str):
         return translations
 
 
+def clear_translations(dest_language: str):
+    with Session(engine) as session:
+        result = (
+            session.query(Translation)
+            .filter_by(destination_language=dest_language)
+            .delete()
+        )
+        session.commit()
+
+    return result
+
+
 if __name__ == "__main__":
     create_db_and_tables()
