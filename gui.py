@@ -5,7 +5,7 @@ import PySimpleGUI as sg
 from decouple import config
 from googletrans import LANGUAGES
 
-from db import retrieve_translations, store_translation
+from db import retrieve_translations, store_translation, clear_translations
 from translate import translate_text
 
 SEPARATOR = "→"
@@ -29,7 +29,10 @@ LAYOUT = [
     ],
     [sg.Input(key="-TEXT-", size=(50, 1))],
     [sg.Listbox(key="-OUT LIST-", size=(50, 10), values=[])],
-    [sg.Button("Copy Selected Item", key="-COPY-")],
+    [
+        sg.Button("Copy Selected Item", key="-COPY-"),
+        sg.Button("Clear Saved", key="-CLEAR-"),
+    ],
 ]
 
 WINDOW = sg.Window("Italki Class Assistant", LAYOUT)
@@ -50,6 +53,7 @@ def update_output(lang_code):
 def main():
     WINDOW.finalize()
     update_output(DEFAULT_LANG_CODE)
+    lang_code = DEFAULT_LANG_CODE
 
     while True:
         event, values = WINDOW.read()
@@ -78,6 +82,10 @@ def main():
                 sep_count = value.count(SEPARATOR)
                 sep_idx = math.ceil(sep_count / 2)
                 pyperclip.copy(value.split(SEPARATOR, sep_idx)[-1].strip())
+
+        if event == "-CLEAR-":
+            print(clear_translations(lang_code))
+            update_output(lang_code)
 
     WINDOW.close()
 
