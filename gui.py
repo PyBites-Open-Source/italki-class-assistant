@@ -1,11 +1,11 @@
 import math
 
+import FreeSimpleGUI as sg
 import pyperclip
-import PySimpleGUI as sg
 from decouple import config
 from googletrans import LANGUAGES
 
-from db import retrieve_translations, store_translation, clear_translations
+from db import clear_translations, retrieve_translations, store_translation
 from translate import translate_text
 
 SEPARATOR = "→"
@@ -63,7 +63,9 @@ def main():
 
         if event == "-LANGUAGE-" or event == "Translate":
             lang_code = [
-                code for code, name in LANGUAGES.items() if name == values["-LANGUAGE-"]
+                code
+                for code, name in LANGUAGES.items()
+                if name == values["-LANGUAGE-"]
             ][0]
 
             if event == "Translate":
