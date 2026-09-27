@@ -1,11 +1,18 @@
 import math
 
+import FreeSimpleGUI as sg
 import pyperclip
-import PySimpleGUI as sg
 from decouple import config
 from googletrans import LANGUAGES
 
-from db import retrieve_translations, store_translation, clear_translations
+from db import (
+    clear_translations,
+    due_cards,
+    record_answer,
+    retrieve_translations,
+    store_translation,
+)
+from review import local_today
 from translate import translate_text
 
 SEPARATOR = "→"
@@ -32,6 +39,7 @@ LAYOUT = [
     [
         sg.Button("Copy Selected Item", key="-COPY-"),
         sg.Button("Clear Saved", key="-CLEAR-"),
+        sg.Button("Review", key="-REVIEW-"),
     ],
 ]
 
@@ -50,6 +58,24 @@ def update_output(lang_code):
     WINDOW["-OUT LIST-"].update(output_values)
 
 
+def review(lang_code: str) -> None:
+    cards = due_cards(lang_code, local_today())
+    if not cards:
+        sg.popup("Nothing due for review.", title="Review")
+        return
+
+    for card in cards:
+        if sg.popup_ok(card.text, title="Review") is None:
+            return
+        answer = sg.popup_yes_no(
+            f"{card.text} {SEPARATOR} {card.translated_text}\n\nKnew it?",
+            title="Review",
+        )
+        if answer is None:
+            return
+        record_answer(card.id, answer == "Yes", local_today())
+
+
 def main():
     WINDOW.finalize()
     update_output(DEFAULT_LANG_CODE)
@@ -63,7 +89,9 @@ def main():
 
         if event == "-LANGUAGE-" or event == "Translate":
             lang_code = [
-                code for code, name in LANGUAGES.items() if name == values["-LANGUAGE-"]
+                code
+                for code, name in LANGUAGES.items()
+                if name == values["-LANGUAGE-"]
             ][0]
 
             if event == "Translate":
@@ -86,6 +114,9 @@ def main():
         if event == "-CLEAR-":
             print(clear_translations(lang_code))
             update_output(lang_code)
+
+        if event == "-REVIEW-":
+            review(lang_code)
 
     WINDOW.close()
 
